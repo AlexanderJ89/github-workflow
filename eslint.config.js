@@ -26,4 +26,14 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+
+   // 🟢 Node.js-specifik fil (t.ex. din server)
+  {
+    files: ['src/server.js'], // Anpassa sökvägen om din fil ligger någon annanstans
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: globals.node, // 👈 Lägg till Node-globals (t.ex. process, __dirname)
+      sourceType: 'module',
+    },
+  },
 ])
