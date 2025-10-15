@@ -1,0 +1,23 @@
+name: Enforce dev → main
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  allow-only-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Allow only dev → main
+        run: |
+          echo "PR: ${{
+            github.head_ref}}  →  ${{
+            github.base_ref}}"
+          if [ "${{ github.head_ref }}" != "dev" ]; then
+            echo "❌ Endast merges från 'dev' till 'main' är tillåtna."
+            exit 1
+          fi
+          echo "✅ OK: PR kommer från 'dev'."
